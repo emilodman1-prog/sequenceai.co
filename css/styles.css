@@ -1517,6 +1517,46 @@ section[id] {
   outline-offset: -1px;
 }
 
+.access-form textarea {
+  width: 100%;
+  padding: 12px 10px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(255, 255, 255, 0.5);
+  color: var(--ink);
+  font: inherit;
+  font-size: 17px;
+  line-height: 1.6;
+  resize: vertical;
+}
+
+.access-form textarea::placeholder {
+  color: var(--black-25);
+}
+
+.access-form textarea:focus {
+  outline: 1px solid var(--black-30);
+  outline-offset: -1px;
+}
+
+.access-form button:disabled {
+  opacity: 0.5;
+  cursor: progress;
+}
+
+/* A field only bots fill in: a request that fills it is dropped. */
+.access-form .hp {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+
+/* The application form sits tighter than the one-field access form. */
+.role-form {
+  gap: 12px;
+}
+
 .access-status {
   display: none;
   width: 100%;
@@ -1526,6 +1566,15 @@ section[id] {
 
 .access-status:not(:empty) {
   display: block;
+}
+
+/* Sent: the thanks takes the form's place, at the size of the dialog's text. */
+.access-status.is-done {
+  font-family: var(--font-sans);
+  font-size: 17px;
+  line-height: 1.5;
+  letter-spacing: -0.01em;
+  color: var(--black-80);
 }
 
 @media (min-width: 768px) {

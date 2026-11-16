@@ -3,6 +3,57 @@
   const clamp = (v, lo, hi) => Math.min(hi, Math.max(lo, v));
   const INBOX = 'hello@sequence.industries';
 
+  /* Forms -------------------------------------------------------------------
+     Requests go straight from the page to the sequence-website project on
+     Supabase. This public key can only add a request: the table's row-level
+     security refuses reading, changing or deleting, so requests are read in the
+     Supabase dashboard. */
+  const REQUESTS = 'https://lqfsyurosfcdytjhqjll.supabase.co/rest/v1/requests';
+  const PUBLIC_KEY = 'sb_publishable_DJlWdcXHuUZ7gUIog-gWhw_jPls8VyN';
+
+  async function sendRequest(record) {
+    const response = await fetch(REQUESTS, {
+      method: 'POST',
+      headers: { apikey: PUBLIC_KEY, 'Content-Type': 'application/json', Prefer: 'return=minimal' },
+      body: JSON.stringify({ ...record, page: location.pathname }),
+    });
+    if (!response.ok) throw new Error(`Request not saved (${response.status})`);
+  }
+
+  // One submit flow for every form: a bot that fills the hidden field is
+  // thanked and dropped, everyone else sees Sending, then thanks or an error.
+  function handleForm(form, status, build, thanks) {
+    const button = form.querySelector('button[type="submit"]');
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (form.elements.website.value) {
+        form.hidden = true;
+        status.textContent = thanks();
+        status.classList.add('is-done');
+        return;
+      }
+      button.disabled = true;
+      status.textContent = 'Sending…';
+      try {
+        await sendRequest(build());
+        form.hidden = true;
+        status.textContent = thanks();
+        status.classList.add('is-done');
+      } catch {
+        status.textContent = `That didn’t go through. Try again, or write to ${INBOX}.`;
+      } finally {
+        button.disabled = false;
+      }
+    });
+  }
+
+  function resetForm(form, status) {
+    form.reset();
+    form.hidden = false;
+    status.textContent = '';
+    status.classList.remove('is-done');
+  }
+
   /* Nav --------------------------------------------------------------------
      White over a dark hero and black after it, with a soft dark fade behind
      it while the hero is on screen. Slides away going down, returns going up.
@@ -172,21 +223,14 @@
       if (e.target === dialog) dialog.close();
     });
 
-    // No server: the request opens in the visitor's own email app, addressed
-    // to the inbox below and ready to send.
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const email = form.elements.email.value.trim();
-      const subject = 'Early access to Sequence';
-      const body = `Please add ${email} to the list for early access to Sequence.`;
-      window.location.href = `mailto:${INBOX}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-      status.textContent = `Opening your email app. Or write to ${INBOX}`;
-    });
+    handleForm(
+      form,
+      status,
+      () => ({ kind: 'access', email: form.elements.email.value.trim() }),
+      () => 'Thanks. We’ll be in touch.',
+    );
 
-    dialog.addEventListener('close', () => {
-      status.textContent = '';
-      form.reset();
-    });
+    dialog.addEventListener('close', () => resetForm(form, status));
   }
 
   /* Feature view -------------------------------------------------------------
@@ -271,20 +315,28 @@
 
   /* Role view -----------------------------------------------------------------
      Every role carries its own text. Opening one copies it into the shared
-     dialog, with an Apply link addressed to the inbox. */
+     dialog, above a short application form that sends from the page. */
   function initRoleView(dialog) {
     const team = dialog.querySelector('#role-team');
     const title = dialog.querySelector('#role-title');
     const text = dialog.querySelector('#role-text');
-    const apply = dialog.querySelector('#role-apply');
+    const form = dialog.querySelector('#role-form');
+    const status = dialog.querySelector('#role-status');
+    const field = (name) => form.elements[name].value.trim();
+
+    handleForm(
+      form,
+      status,
+      () => ({ kind: 'application', role: title.textContent, name: field('name'), email: field('email'), link: field('link'), note: field('note') || null }),
+      () => 'Thanks. Your application is in.',
+    );
 
     document.querySelectorAll('.role').forEach((role) => {
       role.querySelector('.role-open').addEventListener('click', () => {
-        const name = role.querySelector('h3').textContent;
         team.textContent = role.dataset.team;
-        title.textContent = name;
+        title.textContent = role.querySelector('h3').textContent;
         text.innerHTML = role.querySelector('.role-more').innerHTML;
-        apply.href = `mailto:${INBOX}?subject=${encodeURIComponent(`Application: ${name}`)}`;
+        resetForm(form, status);
         dialog.showModal();
       });
     });

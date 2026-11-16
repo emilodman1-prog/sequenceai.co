@@ -23,7 +23,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css?v=37">
+  <link rel="stylesheet" href="css/styles.css?v=38">
 </head>
 <body>
   <a class="skip" href="#main">Skip to content</a>
@@ -55,23 +55,24 @@
         <article class="doc">
           <header class="doc-head">
             <h1 class="t-h3 lg-h2">Privacy Notice</h1>
-            <p class="t-sub muted">Last updated 10 November 2026</p>
+            <p class="t-sub muted">Last updated 17 November 2026</p>
           </header>
           <div class="prose">
             <p>This notice explains what information Sequence collects through this website, and how it is used.</p>
 
             <h3>What we collect</h3>
             <p>This website does not use cookies, analytics or advertising trackers, and it has no accounts or sign-in.</p>
-            <p>When you ask for early access, the form opens your own email app with a message addressed to <a href="mailto:hello@sequence.industries">hello@sequence.industries</a>. Nothing is sent until you send that email yourself. When you do, we receive what any email contains: your email address, your name if your email app includes it, and anything you write. The same applies when you email us directly.</p>
+            <p>When you ask for early access, the form sends us your email address. When you apply for a role, the form sends us your name, your email address, the link you give and any note you add. Each request is stored with the time it was sent and the page it came from.</p>
+            <p>When you email us at <a href="mailto:hello@sequence.industries">hello@sequence.industries</a>, we receive what any email contains: your email address, your name if your email app includes it, and anything you write.</p>
 
             <h3>How we use it</h3>
-            <p>We use it to reply to you, to arrange a pilot, and to keep a record of who has asked for access. We do not sell it, and we do not use it for advertising.</p>
+            <p>We use it to reply to you, to arrange a pilot, to consider your application, and to keep a record of who has asked for access. We do not sell it, and we do not use it for advertising.</p>
 
             <h3>Who else receives data</h3>
-            <p>The fonts on this website load from Google Fonts, so your browser sends your IP address to Google when a page opens. The company that hosts this website keeps standard server logs, such as IP addresses and the time of each request, to run and secure it. Our email provider stores the emails we receive.</p>
+            <p>The fonts on this website load from Google Fonts, so your browser sends your IP address to Google when a page opens. The company that hosts this website keeps standard server logs, such as IP addresses and the time of each request, to run and secure it. Requests sent through the forms are stored in our database, which Supabase hosts for us in the United States. Our email provider stores the emails we receive.</p>
 
             <h3>How long we keep it</h3>
-            <p>We keep your emails while we are in contact about access or a pilot, and delete them once they are no longer needed.</p>
+            <p>We keep your requests and emails while we are in contact about access, a pilot or a role, and delete them once they are no longer needed.</p>
 
             <h3>Your rights</h3>
             <p>You can ask to see the information we hold about you, to correct it, or to have it deleted. Write to <a href="mailto:hello@sequence.industries">hello@sequence.industries</a>. You can also complain to your local data protection authority.</p>
@@ -137,7 +138,8 @@ access.</h2>
         <p class="access-note t-p">Sequence starts with a pilot: one department and a few routines.</p>
         <form class="access-form" id="access-form">
           <label class="sr-only" for="access-email">Email address</label>
-          <input id="access-email" name="email" type="email" placeholder="hello@example.com" autocomplete="email" required>
+          <input id="access-email" name="email" type="email" placeholder="hello@example.com" autocomplete="email" required maxlength="254">
+          <input class="hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
           <button class="btn btn--block" type="submit">Submit <svg viewBox="0 0 7 7" fill="none" aria-hidden="true"><path d="M0 3.5h6M3.4.9 6 3.5 3.4 6.1" stroke="currentColor" stroke-width="1.1"/></svg></button>
         </form>
         <p class="access-status t-mono-12" id="access-status" role="status"></p>
@@ -145,6 +147,6 @@ access.</h2>
     </div>
   </dialog>
 
-  <script src="js/main.js?v=8" defer></script>
+  <script src="js/main.js?v=9" defer></script>
 </body>
 </html>

@@ -23,7 +23,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css?v=37">
+  <link rel="stylesheet" href="css/styles.css?v=38">
 </head>
 <body>
   <a class="skip" href="#main">Skip to content</a>
@@ -252,7 +252,8 @@ access.</h2>
         <p class="access-note t-p">Sequence starts with a pilot: one department and a few routines.</p>
         <form class="access-form" id="access-form">
           <label class="sr-only" for="access-email">Email address</label>
-          <input id="access-email" name="email" type="email" placeholder="hello@example.com" autocomplete="email" required>
+          <input id="access-email" name="email" type="email" placeholder="hello@example.com" autocomplete="email" required maxlength="254">
+          <input class="hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
           <button class="btn btn--block" type="submit">Submit <svg viewBox="0 0 7 7" fill="none" aria-hidden="true"><path d="M0 3.5h6M3.4.9 6 3.5 3.4 6.1" stroke="currentColor" stroke-width="1.1"/></svg></button>
         </form>
         <p class="access-status t-mono-12" id="access-status" role="status"></p>
@@ -269,11 +270,23 @@ access.</h2>
         <p class="t-sub muted" id="role-team"></p>
         <h2 class="t-h4" id="role-title"></h2>
         <div class="feature-text t-p" id="role-text"></div>
-        <a class="btn btn--cta" id="role-apply" href="mailto:hello@sequence.industries">Apply <svg viewBox="0 0 7 7" fill="none" aria-hidden="true"><path d="M0 3.5h6M3.4.9 6 3.5 3.4 6.1" stroke="currentColor" stroke-width="1.1"/></svg></a>
+        <form class="access-form role-form" id="role-form">
+          <label class="sr-only" for="role-name">Name</label>
+          <input id="role-name" name="name" type="text" placeholder="Your name" autocomplete="name" required maxlength="200">
+          <label class="sr-only" for="role-email">Email address</label>
+          <input id="role-email" name="email" type="email" placeholder="hello@example.com" autocomplete="email" required maxlength="254">
+          <label class="sr-only" for="role-link">LinkedIn or a link to your CV</label>
+          <input id="role-link" name="link" type="text" inputmode="url" placeholder="LinkedIn or a link to your CV" autocomplete="url" required maxlength="500">
+          <label class="sr-only" for="role-note">Note</label>
+          <textarea id="role-note" name="note" rows="3" placeholder="Anything else you want us to know (optional)" maxlength="4000"></textarea>
+          <input class="hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+          <button class="btn btn--block" type="submit">Apply <svg viewBox="0 0 7 7" fill="none" aria-hidden="true"><path d="M0 3.5h6M3.4.9 6 3.5 3.4 6.1" stroke="currentColor" stroke-width="1.1"/></svg></button>
+        </form>
+        <p class="access-status t-mono-12" id="role-status" role="status"></p>
       </div>
     </div>
   </dialog>
 
-  <script src="js/main.js?v=8" defer></script>
+  <script src="js/main.js?v=9" defer></script>
 </body>
 </html>
