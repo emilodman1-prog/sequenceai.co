@@ -333,12 +333,20 @@ ul {
 
 /* Announcement bar ------------------------------------------------------ */
 
+/* On the hero photo at every size, as on the laptop: white text over the nav's
+   soft dark fade. Below 1024px it keeps its own row above the nav; from 1024px
+   it sits in the nav's row. */
 .announce {
   position: absolute;
   inset: 0 0 auto 0;
   z-index: 41;
-  background: #000;
   color: #fff;
+  transition: color 0.3s var(--ease);
+}
+
+/* The open menu covers the photo, so the line turns black with the nav. */
+.menu-open .announce {
+  color: #000;
 }
 
 .announce-inner {
@@ -365,7 +373,7 @@ ul {
 }
 
 .announce-more {
-  display: none;
+  display: inline-flex;
   align-items: center;
   gap: 8px;
   opacity: 0.5;
@@ -400,11 +408,27 @@ ul {
   transform: translateX(4px);
 }
 
+/* Below the laptop the line runs as plain text, so "Learn more" follows the
+   last word instead of taking a line of its own: two lines on a phone. */
+@media (max-width: 1023px) {
+  .announce-link {
+    display: block;
+    width: auto;
+    height: auto;
+    text-wrap: balance;
+  }
+
+  .announce-more {
+    margin-left: 8px;
+    white-space: nowrap;
+    vertical-align: bottom;
+  }
+}
+
 @media (min-width: 1024px) {
   /* no stacking context here, so the link can sit above the fixed nav */
   .announce {
     z-index: auto;
-    background: transparent;
   }
 
   .announce-inner {
@@ -415,10 +439,6 @@ ul {
     max-width: calc(100% - 352px);
     margin: 0 auto;
     padding: 0;
-  }
-
-  .announce-more {
-    display: inline-flex;
   }
 }
 
