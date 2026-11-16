@@ -1259,15 +1259,11 @@ ul {
   overflow: hidden;
 }
 
-/* The mark runs the full width, larger than the space it sits in: the
-   frame stops partway down and its curve sweeps out through the bottom. */
+/* A field of fine lines runs the full width, each one the mark's own arc;
+   one filled band of it is the mark. The image carries its own tones. */
 .footer-art .ph {
   width: 100%;
   aspect-ratio: 390 / 170;
-}
-
-.footer-art .ph > img {
-  opacity: 0.56;
 }
 
 .footer-base {
