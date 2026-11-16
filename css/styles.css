@@ -1278,119 +1278,108 @@ ul {
   aspect-ratio: 390 / 170;
 }
 
+/* Base: Sequence and one line, columns of links, and a quiet bar with
+   the copyright and the address. */
 .footer-base {
   width: 100%;
-  padding: 50px 20px 20px;
+  padding: 56px 20px 24px;
   border-top: var(--hair) solid var(--line);
 }
 
-.footer-stack {
+.footer-top {
+  display: grid;
+  gap: 48px;
+}
+
+.footer-brand p {
+  margin: 0;
+}
+
+.footer-brand .t-sub {
+  margin-top: 12px;
+  max-width: 26ch;
+}
+
+.footer-cols {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 36px 20px;
+}
+
+.footer-col {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  justify-content: center;
-  gap: 32px;
-  width: 100%;
+  gap: 11px;
+  font-size: 14px;
+  line-height: 1.4;
+  letter-spacing: -0.02em;
 }
 
-.footer-links {
+.footer-col p {
+  margin: 0 0 3px;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.footer-col a,
+.footer-col button {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  letter-spacing: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+
+.footer-col a:hover,
+.footer-col button:hover {
+  opacity: 0.6;
+}
+
+.footer-bar {
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
   justify-content: space-between;
-  gap: 12px;
-  width: 100%;
+  gap: 12px 24px;
+  margin-top: 64px;
+  padding-top: 20px;
+  border-top: var(--hair) solid var(--line);
+  font-size: 12px;
+  letter-spacing: -0.01em;
+  color: rgba(0, 0, 0, 0.55);
 }
 
-.footer-links a {
-  white-space: nowrap;
-  transition: opacity 0.15s;
+.footer-bar a {
+  transition: color 0.15s;
 }
 
-.footer-links a:hover {
-  opacity: 0.64;
-}
-
-.footer-mobile {
-  display: flex;
-  flex-direction: column;
-  gap: 40px;
-  width: 100%;
-}
-
-.footer-display {
-  font-size: clamp(36px, -6.08px + 15.2vw, 60px);
-  line-height: 1.32;
-  letter-spacing: -0.02em;
-  white-space: nowrap;
-  /* keep the tagline short: it is sized to fill one line on a phone */
-  max-width: 100%;
-  overflow: hidden;
-}
-
-.footer-row {
-  display: none;
-}
-
-.footer-address {
-  flex: none;
-  font-style: normal;
-}
-
-.footer-address a {
-  transition: opacity 0.15s;
-}
-
-.footer-address a:hover {
-  opacity: 0.64;
-}
-
-@media (min-width: 768px) {
-  .footer-base {
-    padding-inline: var(--gutter);
-    padding-bottom: var(--gutter);
-  }
-
-  .footer-links {
-    column-gap: 24px;
-  }
+.footer-bar a:hover {
+  color: #000;
 }
 
 @media (min-width: 1024px) {
   .footer-base {
-    padding-top: 60px;
+    padding-top: 72px;
   }
 
-  .footer-stack {
-    align-items: stretch;
-    gap: 20px;
+  .footer-top {
+    grid-template-columns: minmax(0, 1.3fr) minmax(0, 3fr);
   }
 
-  .footer-mobile {
-    display: none;
+  .footer-cols {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
+}
 
-  .footer-row {
-    display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
-    gap: 20px;
-    width: 100%;
-  }
-
-  .footer-row .t-h1 {
-    white-space: nowrap;
-    transform: translateX(-5px);
-  }
-
-  .footer-row .t-h1,
-  .footer-address {
-    text-box: trim-both cap alphabetic;
-  }
-
-  .footer-row .btn {
-    flex: none;
-    width: auto;
-  }
+/* Sections the footer links to land clear of the fixed nav. */
+h2[id],
+h3[id],
+section[id] {
+  scroll-margin-top: 96px;
 }
 
 /* Access dialog --------------------------------------------------------- */

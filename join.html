@@ -23,7 +23,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css?v=36">
+  <link rel="stylesheet" href="css/styles.css?v=37">
 </head>
 <body>
   <a class="skip" href="#main">Skip to content</a>
@@ -80,7 +80,7 @@
       <div class="rail" aria-hidden="true"></div>
 
       <div class="shell-main">
-        <section class="roles">
+        <section class="roles" id="roles">
           <div class="roles-inner">
             <h2 class="t-h4 lg-h3">Open roles</h2>
             <div class="roles-main">
@@ -203,24 +203,35 @@
       <div class="ph ph--contain"><img src="assets/footer-field.svg" alt="" width="390" height="170"></div>
     </div>
     <div class="footer-base">
-      <div class="footer-stack">
-        <nav class="footer-links t-sub" aria-label="Footer">
-          <a href="mailto:hello@sequence.industries">Contact</a>
-          <a href="privacy.html">Privacy Notice</a>
-          <a href="assets/sequence-media-kit.zip" download>Media Kit</a>
-          <a href="join.html">Join Us</a>
+      <div class="footer-top">
+        <div class="footer-brand">
+          <p class="t-h4">Sequence</p>
+          <p class="t-sub muted">Private intelligence for organizations.</p>
+        </div>
+        <nav class="footer-cols" aria-label="Footer">
+          <div class="footer-col">
+            <p>Product</p>
+            <a href="index.html#product">The product</a>
+            <a href="index.html#s1">S1</a>
+            <a href="index.html#who-its-for">Who it’s for</a>
+            <button type="button" data-open-access>Get Access</button>
+          </div>
+          <div class="footer-col">
+            <p>Company</p>
+            <a href="join.html">Join Us</a>
+            <a href="join.html#roles">Open roles</a>
+            <a href="assets/sequence-media-kit.zip" download>Media Kit</a>
+            <a href="mailto:hello@sequence.industries">Contact</a>
+          </div>
+          <div class="footer-col">
+            <p>Legal</p>
+            <a href="privacy.html">Privacy Notice</a>
+          </div>
         </nav>
-        <div class="footer-mobile">
-          <p class="footer-display">Sequence</p>
-          <button class="btn btn--cta" type="button" data-open-access>Get Access <svg viewBox="0 0 7 7" fill="none" aria-hidden="true"><path d="M0 3.5h6M3.4.9 6 3.5 3.4 6.1" stroke="currentColor" stroke-width="1.1"/></svg></button>
-        </div>
-        <div class="footer-row">
-          <p class="t-h1">Sequence</p>
-          <address class="footer-address t-sub">
-            <a href="mailto:hello@sequence.industries">hello@sequence.industries</a>
-          </address>
-          <button class="btn btn--cta" type="button" data-open-access>Get Access <svg viewBox="0 0 7 7" fill="none" aria-hidden="true"><path d="M0 3.5h6M3.4.9 6 3.5 3.4 6.1" stroke="currentColor" stroke-width="1.1"/></svg></button>
-        </div>
+      </div>
+      <div class="footer-bar">
+        <span>© 2026 Sequence</span>
+        <a href="mailto:hello@sequence.industries">hello@sequence.industries</a>
       </div>
     </div>
   </footer>
