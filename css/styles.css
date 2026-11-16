@@ -1166,6 +1166,18 @@ ul {
   border-bottom: 0;
 }
 
+/* The page's last word: one line and the one action under it. */
+.band--closing {
+  flex-direction: column;
+  gap: 36px;
+  padding: 120px 20px;
+}
+
+.band--closing p {
+  margin: 0;
+  text-wrap: balance;
+}
+
 .band > span {
   width: 276px;
   transition: color 0.15s;
