@@ -1761,11 +1761,13 @@ section[id] {
   text-wrap: balance;
 }
 
+/* The image is 4:3. Phones show all of it; wider screens crop it to a 400px band. */
 .join-media {
   position: relative;
   flex: none;
   width: 100%;
-  height: 400px;
+  aspect-ratio: 4 / 3;
+  max-height: 400px;
   margin: 32px auto 0;
   overflow: hidden;
 }
@@ -1785,8 +1787,9 @@ section[id] {
   inset: 0;
 }
 
+/* Keeps the memory chips in the band, just above the fade. */
 .join-media .ph > img {
-  object-position: top;
+  object-position: 50% 57%;
 }
 
 @media (prefers-reduced-motion: no-preference) {
