@@ -1,0 +1,52 @@
+name: Keep forms awake
+
+# The site's forms send to a free Supabase project (sequence-website), and free
+# projects pause after a week with no activity. This asks the database one tiny
+# question every day so it stays awake. A failed run means the forms may be
+# down; GitHub notifies the account that set this up.
+#
+# GitHub also stops scheduled jobs in a public repository after 60 days without
+# activity. Every site update is a commit, so this only matters if the site sits
+# untouched: after 50 quiet days the job adds one small commit of its own.
+
+on:
+  schedule:
+    - cron: "23 7 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: keep-forms-awake
+  cancel-in-progress: false
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Ping the forms database
+        run: |
+          curl -fsS --retry 3 --retry-delay 20 -X POST \
+            "https://lqfsyurosfcdytjhqjll.supabase.co/rest/v1/rpc/ping" \
+            -H "apikey: sb_publishable_DJlWdcXHuUZ7gUIog-gWhw_jPls8VyN" \
+            -H "Content-Type: application/json" \
+            -d '{}'
+          echo
+
+      - name: Keep this schedule running
+        env:
+          TOKEN: ${{ github.token }}
+        run: |
+          git clone --quiet --depth 1 "https://x-access-token:${TOKEN}@github.com/${GITHUB_REPOSITORY}.git" site
+          cd site
+          quiet_days=$(( ($(date +%s) - $(git log -1 --format=%ct)) / 86400 ))
+          echo "Last commit was ${quiet_days} days ago."
+          if [ "$quiet_days" -lt 50 ]; then exit 0; fi
+          date -u +%F > .github/keep-awake
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add .github/keep-awake
+          git commit --quiet -m "Keep the daily forms ping scheduled"
+          git push --quiet
